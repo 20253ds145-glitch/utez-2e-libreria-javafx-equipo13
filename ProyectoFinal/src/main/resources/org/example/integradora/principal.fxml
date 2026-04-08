@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="10" style="-fx-padding: 15;" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="org.example.integradora.Controller.PrincipalController">
+
+    <Label text="Catálogo de Libros" style="-fx-font-size: 20; -fx-font-weight: bold;"/>
+
+    <TableView fx:id="tblLibros" prefHeight="350">
+        <columns>
+            <TableColumn fx:id="colIsbn"       text="ISBN"        prefWidth="100"/>
+            <TableColumn fx:id="colTitulo"     text="Título"      prefWidth="180"/>
+            <TableColumn fx:id="colAutor"      text="Autor"       prefWidth="150"/>
+            <TableColumn fx:id="colAnio"       text="Año"         prefWidth="60"/>
+            <TableColumn fx:id="colGenero"     text="Género"      prefWidth="120"/>
+            <TableColumn fx:id="colDisponible" text="Disponible"  prefWidth="90"/>
+        </columns>
+    </TableView>
+
+    <HBox spacing="10">
+        <Button text="Nuevo"       onAction="#onNuevo"/>
+        <Button text="Editar"      onAction="#onEditar"/>
+        <Button text="Eliminar"    onAction="#onEliminar"/>
+        <Button text="Ver Detalle" onAction="#onVerDetalle"/>
+        <Button text="Exportar"    onAction="#onExportar"/>
+    </HBox>
+
+</VBox>
