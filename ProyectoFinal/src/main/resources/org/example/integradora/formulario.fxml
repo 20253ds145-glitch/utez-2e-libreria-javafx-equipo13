@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="10" style="-fx-padding: 15;" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="org.example.integradora.Controller.FormularioController">
+
+    <Label text="Datos del Libro" style="-fx-font-size: 16; -fx-font-weight: bold;"/>
+
+    <HBox spacing="10">
+        <Label text="ISBN:"    prefWidth="80"/>
+        <TextField fx:id="txtIsbn" prefWidth="250"/>
+    </HBox>
+
+    <HBox spacing="10">
+        <Label text="Título:"  prefWidth="80"/>
+        <TextField fx:id="txtTitulo" prefWidth="250"/>
+    </HBox>
+
+    <HBox spacing="10">
+        <Label text="Autor:"   prefWidth="80"/>
+        <TextField fx:id="txtAutor" prefWidth="250"/>
+    </HBox>
+
+    <HBox spacing="10">
+        <Label text="Año:"     prefWidth="80"/>
+        <TextField fx:id="txtAnio" prefWidth="250"/>
+    </HBox>
+
+    <HBox spacing="10">
+        <Label text="Género:"  prefWidth="80"/>
+        <TextField fx:id="txtGenero" prefWidth="250"/>
+    </HBox>
+
+    <HBox spacing="10">
+        <Label text="Disponible:" prefWidth="80"/>
+        <CheckBox fx:id="chkDisponible"/>
+    </HBox>
+
+    <HBox spacing="10">
+        <Button text="Guardar"  onAction="#onGuardar"/>
+        <Button text="Cancelar" onAction="#onCancelar"/>
+    </HBox>
+
+</VBox>
