@@ -27,16 +27,19 @@ public class PrincipalController {
 
     @FXML
     public void initialize() {
-        // Conectar columnas con atributos del modelo
-        colIsbn.setCellValueFactory(new PropertyValueFactory<>("isbn"));
-        colTitulo.setCellValueFactory(new PropertyValueFactory<>("titulo"));
-        colAutor.setCellValueFactory(new PropertyValueFactory<>("autor"));
-        colAnio.setCellValueFactory(new PropertyValueFactory<>("anio"));
-        colGenero.setCellValueFactory(new PropertyValueFactory<>("genero"));
-        colDisponible.setCellValueFactory(new PropertyValueFactory<>("disponible"));
 
-        // Mostrar los libros en la tabla
+        colIsbn.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getIsbn()));
+        colTitulo.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getTitulo()));
+        colAutor.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getAutor()));
+        colAnio.setCellValueFactory(cellData -> new javafx.beans.property.SimpleObjectProperty<>(cellData.getValue().getAnio()));
+        colGenero.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getGenero()));
+        colDisponible.setCellValueFactory(cellData -> new javafx.beans.property.SimpleBooleanProperty(cellData.getValue().isDisponible()));
+
         tblLibros.setItems(repositorio.getLista());
+
+
+
+
     }
 
     @FXML
