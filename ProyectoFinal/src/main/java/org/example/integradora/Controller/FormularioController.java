@@ -65,7 +65,7 @@ public class FormularioController {
         }
 
         // Validar rango del año
-        if (anio < 1500 || anio > 2025) {
+        if (anio < 1500 || anio > 2026) {
             mostrarAlerta("El año debe estar entre 1500 y 2025.");
             return;
         }
@@ -118,3 +118,4 @@ public class FormularioController {
         alert.showAndWait();
     }
 }
+

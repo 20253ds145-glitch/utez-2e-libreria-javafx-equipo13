@@ -27,20 +27,19 @@ public class PrincipalController {
 
     @FXML
     public void initialize() {
+        // 1. Conectamos cada columna con el nombre exacto del atributo en la clase Libro
+        colIsbn.setCellValueFactory(new PropertyValueFactory<>("isbn"));
+        colTitulo.setCellValueFactory(new PropertyValueFactory<>("titulo"));
+        colAutor.setCellValueFactory(new PropertyValueFactory<>("autor"));
+        colAnio.setCellValueFactory(new PropertyValueFactory<>("anio"));
+        colGenero.setCellValueFactory(new PropertyValueFactory<>("genero"));
+        colDisponible.setCellValueFactory(new PropertyValueFactory<>("disponible"));
 
-        colIsbn.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getIsbn()));
-        colTitulo.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getTitulo()));
-        colAutor.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getAutor()));
-        colAnio.setCellValueFactory(cellData -> new javafx.beans.property.SimpleObjectProperty<>(cellData.getValue().getAnio()));
-        colGenero.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getGenero()));
-        colDisponible.setCellValueFactory(cellData -> new javafx.beans.property.SimpleBooleanProperty(cellData.getValue().isDisponible()));
-
+        // 2. Le pasamos la lista de libros a la tabla
         tblLibros.setItems(repositorio.getLista());
-
-
-
-
     }
+
+
 
     @FXML
     void onNuevo(ActionEvent event) {
@@ -113,7 +112,6 @@ public class PrincipalController {
             mostrarAlerta("Selecciona un libro para ver el detalle.");
             return;
         }
-
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/integradora/detalle.fxml"));
             Stage stage = new Stage();
