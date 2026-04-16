@@ -27,7 +27,6 @@ public class PrincipalController {
 
     @FXML
     public void initialize() {
-        // 1. Conectamos cada columna con el nombre exacto del atributo en la clase Libro
         colIsbn.setCellValueFactory(new PropertyValueFactory<>("isbn"));
         colTitulo.setCellValueFactory(new PropertyValueFactory<>("titulo"));
         colAutor.setCellValueFactory(new PropertyValueFactory<>("autor"));
@@ -35,11 +34,8 @@ public class PrincipalController {
         colGenero.setCellValueFactory(new PropertyValueFactory<>("genero"));
         colDisponible.setCellValueFactory(new PropertyValueFactory<>("disponible"));
 
-        // 2. Le pasamos la lista de libros a la tabla
         tblLibros.setItems(repositorio.getLista());
     }
-
-
 
     @FXML
     void onNuevo(ActionEvent event) {
@@ -97,7 +93,7 @@ public class PrincipalController {
 
         Alert confirmacion = new Alert(Alert.AlertType.CONFIRMATION);
         confirmacion.setTitle("Confirmar");
-        confirmacion.setContentText("¿Eliminar el libro: " + seleccionado.getTitulo() + "?");
+        confirmacion.setContentText("Eliminar el libro: " + seleccionado.getTitulo() + "?");
         confirmacion.showAndWait().ifPresent(respuesta -> {
             if (respuesta == ButtonType.OK) {
                 repositorio.eliminar(seleccionado);
@@ -112,6 +108,7 @@ public class PrincipalController {
             mostrarAlerta("Selecciona un libro para ver el detalle.");
             return;
         }
+
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/integradora/detalle.fxml"));
             Stage stage = new Stage();
