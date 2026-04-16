@@ -9,7 +9,7 @@
     <Label text="Datos del Libro" style="-fx-font-size: 16; -fx-font-weight: bold;"/>
 
     <HBox spacing="10">
-        <Label text="ISBN:"    prefWidth="80"/>
+        <Label text="ID:"    prefWidth="80"/>
         <TextField fx:id="txtIsbn" prefWidth="250"/>
     </HBox>
 
