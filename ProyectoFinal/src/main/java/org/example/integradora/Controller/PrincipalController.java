@@ -27,19 +27,14 @@ public class PrincipalController {
 
     @FXML
     public void initialize() {
-
-        colIsbn.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getIsbn()));
-        colTitulo.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getTitulo()));
-        colAutor.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getAutor()));
-        colAnio.setCellValueFactory(cellData -> new javafx.beans.property.SimpleObjectProperty<>(cellData.getValue().getAnio()));
-        colGenero.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getGenero()));
-        colDisponible.setCellValueFactory(cellData -> new javafx.beans.property.SimpleBooleanProperty(cellData.getValue().isDisponible()));
+        colIsbn.setCellValueFactory(new PropertyValueFactory<>("isbn"));
+        colTitulo.setCellValueFactory(new PropertyValueFactory<>("titulo"));
+        colAutor.setCellValueFactory(new PropertyValueFactory<>("autor"));
+        colAnio.setCellValueFactory(new PropertyValueFactory<>("anio"));
+        colGenero.setCellValueFactory(new PropertyValueFactory<>("genero"));
+        colDisponible.setCellValueFactory(new PropertyValueFactory<>("disponible"));
 
         tblLibros.setItems(repositorio.getLista());
-
-
-
-
     }
 
     @FXML
@@ -98,7 +93,7 @@ public class PrincipalController {
 
         Alert confirmacion = new Alert(Alert.AlertType.CONFIRMATION);
         confirmacion.setTitle("Confirmar");
-        confirmacion.setContentText("¿Eliminar el libro: " + seleccionado.getTitulo() + "?");
+        confirmacion.setContentText("Eliminar el libro: " + seleccionado.getTitulo() + "?");
         confirmacion.showAndWait().ifPresent(respuesta -> {
             if (respuesta == ButtonType.OK) {
                 repositorio.eliminar(seleccionado);
