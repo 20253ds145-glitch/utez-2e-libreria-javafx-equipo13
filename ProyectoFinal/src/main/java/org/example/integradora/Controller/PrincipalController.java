@@ -27,17 +27,6 @@ public class PrincipalController {
 
     @FXML
     public void initialize() {
-<<<<<<< Updated upstream
-
-        colIsbn.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getIsbn()));
-        colTitulo.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getTitulo()));
-        colAutor.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getAutor()));
-        colAnio.setCellValueFactory(cellData -> new javafx.beans.property.SimpleObjectProperty<>(cellData.getValue().getAnio()));
-        colGenero.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getGenero()));
-        colDisponible.setCellValueFactory(cellData -> new javafx.beans.property.SimpleBooleanProperty(cellData.getValue().isDisponible()));
-
-=======
-        // se conecto cada columna con el nombre exacto del atributo en la clase Libro
         colIsbn.setCellValueFactory(new PropertyValueFactory<>("isbn"));
         colTitulo.setCellValueFactory(new PropertyValueFactory<>("titulo"));
         colAutor.setCellValueFactory(new PropertyValueFactory<>("autor"));
@@ -45,13 +34,7 @@ public class PrincipalController {
         colGenero.setCellValueFactory(new PropertyValueFactory<>("genero"));
         colDisponible.setCellValueFactory(new PropertyValueFactory<>("disponible"));
 
-        // 2. Le pasamos la lista de libros a la tabla
->>>>>>> Stashed changes
         tblLibros.setItems(repositorio.getLista());
-
-
-
-
     }
 
     @FXML
