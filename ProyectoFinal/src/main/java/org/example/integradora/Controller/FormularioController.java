@@ -20,7 +20,7 @@ public class FormularioController {
     private Libro libroEditar;
 
     public void inicializar(Libro libro, LibroRepository repositorio) {
-        this.repositorio = repositorio;
+        this.repositorio =repositorio;
         this.libroEditar = libro;
 
         // Si nos pasan un libro, es edicion,llenamos los campos
@@ -75,7 +75,7 @@ public class FormularioController {
             // Validar ISBN duplicado
             for (Libro l : repositorio.getLista()) {
                 if (l.getIsbn().equals(txtIsbn.getText())) {
-                    mostrarAlerta("Ya existe un libro con ese ISBN.");
+                    mostrarAlerta("Ya existe un libro con ese ID.");
                     return;
                 }
             }
