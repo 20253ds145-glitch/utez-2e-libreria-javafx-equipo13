@@ -16,3 +16,25 @@ Acceso a los datos: El método exportarReporte() dentro de LibroRepository toma 
 Creacion del archivo: Se utiliza la clase BufferedWriter para crear un nuevo archivo llamado reporte.csv.
 Encabezado : aqui se escribe una primera linea con los titulos de las columnas: "id,Titulo,Autor,Año,Genero,Disponible". 
 Ciclo de Escritura: El sistema recorre la lista libro por libro y utiliza el método l.aTexto() para convertir cada objeto en una linea de texto separada por comas, agregandola al archivo.
+
+
+
+Capturas del codigo:
+<img width="1920" height="1077" alt="image" src="https://github.com/user-attachments/assets/e2f00909-5fcc-41bd-a87f-5e6f7aff2720" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/a5a1b4e2-2322-4df0-8fed-3caca236c556" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/cd87991c-627b-4d2a-b8f9-86760276db1d" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/3f4c0487-0e1f-41b5-9b3e-7da35adcbc93" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/1560cdf3-fb28-4be4-86c4-bb6fdc97442a" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/ac30bda5-25d8-4798-80b6-f628b46bfda3" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/d68f0597-d0b2-4c69-b499-1d1f1d5d705e" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/bb40385b-a30c-4a67-b1bc-eade3ca1a315" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/2c3123be-d554-4037-ac74-11a9de48cd20" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/9f12d1a2-649d-45e1-aae4-094c73ad83bd" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/8808dfbd-0e67-435b-9e71-7638e3d4ace1" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/0ac91f0c-4511-48ff-8fc4-ed30208fd43f" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/5e7ff217-ffa4-4553-b59c-e067fd917411" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/996600ae-20fa-4bb9-acf0-b815d50a72aa" />
+
+
+
+
