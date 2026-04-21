@@ -1,28 +1,22 @@
 package org.example.integradora.Controller;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import org.example.integradora.Model.Libro;
 import org.example.integradora.Service.LibroRepository;
-
 public class FormularioController {
-
     @FXML private TextField txtIsbn;
     @FXML private TextField txtTitulo;
     @FXML private TextField txtAutor;
     @FXML private TextField txtAnio;
     @FXML private TextField txtGenero;
     @FXML private CheckBox  chkDisponible;
-
     private LibroRepository repositorio;
     private Libro libroEditar;
-
     public void inicializar(Libro libro, LibroRepository repositorio) {
         this.repositorio =repositorio;
         this.libroEditar = libro;
-
         // Si nos pasan un libro, es edicion,llenamos los campos
         if (libro != null) {
             txtIsbn.setText(libro.getIsbn());
@@ -33,7 +27,6 @@ public class FormularioController {
             chkDisponible.setSelected(libro.isDisponible());
         }
     }
-
     @FXML
     void onGuardar(ActionEvent event) {
 
@@ -44,7 +37,6 @@ public class FormularioController {
             mostrarAlerta("Todos los campos son obligatorios.");
             return;
         }
-
         // Validar minimo 3 caracteres
         if (txtTitulo.getText().length() < 3) {
             mostrarAlerta("El título debe tener al menos 3 caracteres.");
@@ -54,7 +46,6 @@ public class FormularioController {
             mostrarAlerta("El autor debe tener al menos 3 caracteres.");
             return;
         }
-
         // Validar que el año sea número
         int anio;
         try {
@@ -79,7 +70,6 @@ public class FormularioController {
                     return;
                 }
             }
-
             Libro nuevo = new Libro(
                     txtIsbn.getText(),
                     txtTitulo.getText(),
@@ -89,7 +79,6 @@ public class FormularioController {
                     chkDisponible.isSelected()
             );
             repositorio.agregar(nuevo);
-
         } else {
             libroEditar.setIsbn(txtIsbn.getText());
             libroEditar.setTitulo(txtTitulo.getText());
@@ -99,18 +88,15 @@ public class FormularioController {
             libroEditar.setDisponible(chkDisponible.isSelected());
             repositorio.actualizar();
         }
-
         // Cerrar la ventana
         Stage stage = (Stage) txtIsbn.getScene().getWindow();
         stage.close();
     }
-
     @FXML
     void onCancelar(ActionEvent event) {
         Stage stage = (Stage) txtIsbn.getScene().getWindow();
         stage.close();
     }
-
     private void mostrarAlerta(String mensaje) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Aviso");

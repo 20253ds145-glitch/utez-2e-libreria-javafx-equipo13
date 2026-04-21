@@ -1,13 +1,11 @@
 package org.example.integradora.Model;
 public class Libro {
-
     private String isbn;
     private String titulo;
     private String autor;
     private int anio;
     private String genero;
     private boolean disponible;
-
     public Libro(String isbn, String titulo, String autor, int anio, String genero, boolean disponible) {
         this.isbn = isbn;
         this.titulo = titulo;
@@ -16,7 +14,6 @@ public class Libro {
         this.genero = genero;
         this.disponible = disponible;
     }
-
     public String getIsbn() { return isbn; }
     public void setIsbn(String isbn) { this.isbn = isbn; }
 

@@ -1,5 +1,5 @@
 package org.example.integradora.Controller;
-
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,9 +10,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.example.integradora.Model.Libro;
 import org.example.integradora.Service.LibroRepository;
-
 public class PrincipalController {
-
     // Tabla y columnas
     @FXML private TableView<Libro> tblLibros;
     @FXML private TableColumn<Libro, String>  colIsbn;
@@ -21,22 +19,20 @@ public class PrincipalController {
     @FXML private TableColumn<Libro, Integer> colAnio;
     @FXML private TableColumn<Libro, String>  colGenero;
     @FXML private TableColumn<Libro, Boolean> colDisponible;
-
     // El repositorio maneja los datos y el archivo
     private LibroRepository repositorio = new LibroRepository();
-
     @FXML
     public void initialize() {
-        colIsbn.setCellValueFactory(new PropertyValueFactory<>("isbn"));
-        colTitulo.setCellValueFactory(new PropertyValueFactory<>("titulo"));
-        colAutor.setCellValueFactory(new PropertyValueFactory<>("autor"));
-        colAnio.setCellValueFactory(new PropertyValueFactory<>("anio"));
-        colGenero.setCellValueFactory(new PropertyValueFactory<>("genero"));
-        colDisponible.setCellValueFactory(new PropertyValueFactory<>("disponible"));
+        colIsbn.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getIsbn()));
+        colTitulo.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getTitulo()));
+        colAutor.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getAutor()));
+        colAnio.setCellValueFactory(cellData -> new javafx.beans.property.SimpleObjectProperty<>(cellData.getValue().getAnio()));
+        colGenero.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getGenero()));
+        colDisponible.setCellValueFactory(cellData -> new javafx.beans.property.SimpleBooleanProperty(cellData.getValue().isDisponible()));
 
         tblLibros.setItems(repositorio.getLista());
-    }
 
+    }
     @FXML
     void onNuevo(ActionEvent event) {
         try {
@@ -45,18 +41,15 @@ public class PrincipalController {
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setTitle("Nuevo Libro");
             stage.setScene(new Scene(loader.load()));
-
             // Le pasamos el repositorio y null porque es libro nuevo
             FormularioController controller = loader.getController();
             controller.inicializar(null, repositorio);
-
             stage.showAndWait();
             tblLibros.refresh();
         } catch (Exception e) {
             System.out.println("Error al abrir formulario: " + e.getMessage());
         }
     }
-
     @FXML
     void onEditar(ActionEvent event) {
         Libro seleccionado = tblLibros.getSelectionModel().getSelectedItem();
@@ -71,18 +64,15 @@ public class PrincipalController {
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setTitle("Editar Libro");
             stage.setScene(new Scene(loader.load()));
-
             // Le pasamos el repositorio y el libro a editar
             FormularioController controller = loader.getController();
             controller.inicializar(seleccionado, repositorio);
-
             stage.showAndWait();
             tblLibros.refresh();
         } catch (Exception e) {
             System.out.println("Error al abrir formulario: " + e.getMessage());
         }
     }
-
     @FXML
     void onEliminar(ActionEvent event) {
         Libro seleccionado = tblLibros.getSelectionModel().getSelectedItem();
@@ -90,7 +80,6 @@ public class PrincipalController {
             mostrarAlerta("Selecciona un libro para eliminar.");
             return;
         }
-
         Alert confirmacion = new Alert(Alert.AlertType.CONFIRMATION);
         confirmacion.setTitle("Confirmar");
         confirmacion.setContentText("Eliminar el libro: " + seleccionado.getTitulo() + "?");
@@ -100,7 +89,6 @@ public class PrincipalController {
             }
         });
     }
-
     @FXML
     void onVerDetalle(ActionEvent event) {
         Libro seleccionado = tblLibros.getSelectionModel().getSelectedItem();
@@ -108,23 +96,19 @@ public class PrincipalController {
             mostrarAlerta("Selecciona un libro para ver el detalle.");
             return;
         }
-
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/integradora/detalle.fxml"));
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setTitle("Detalle del Libro");
             stage.setScene(new Scene(loader.load()));
-
             DetalleController controller = loader.getController();
             controller.inicializar(seleccionado);
-
             stage.showAndWait();
         } catch (Exception e) {
             System.out.println("Error al abrir detalle: " + e.getMessage());
         }
     }
-
     @FXML
     void onExportar(ActionEvent event) {
         repositorio.exportarReporte();
@@ -133,7 +117,6 @@ public class PrincipalController {
         info.setContentText("Reporte exportado como reporte.csv");
         info.showAndWait();
     }
-
     private void mostrarAlerta(String mensaje) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Aviso");
