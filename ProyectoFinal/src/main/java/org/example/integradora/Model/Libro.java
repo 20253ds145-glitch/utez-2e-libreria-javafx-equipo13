@@ -38,8 +38,14 @@ public class Libro {
     }
 
     // Crea un Libro desde una línea del archivo
-    public static Libro desdeTexto(String linea) {
+    public Libro(String linea) {
         String[] p = linea.split(",");
-        return new Libro(p[0], p[1], p[2], Integer.parseInt(p[3]), p[4], Boolean.parseBoolean(p[5]));
+        this.isbn = p[0];
+        this.titulo = p[1];
+        this.autor = p[2];
+        this.anio = Integer.parseInt(p[3]);
+        this.genero = p[4];
+        this.disponible = Boolean.parseBoolean(p[5]);
     }
+
 }

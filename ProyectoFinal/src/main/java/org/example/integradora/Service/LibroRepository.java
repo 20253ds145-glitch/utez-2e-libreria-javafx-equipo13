@@ -3,12 +3,16 @@ import org.example.integradora.Model.Libro;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import java.io.*;
-public class LibroRepository  {
+import java.util.Scanner;
+
+public class LibroRepository {
     private static final String ARCHIVO = "libros.csv";
     private ObservableList<Libro> lista = FXCollections.observableArrayList();
+
     public LibroRepository() {
         cargar();
     }
+
     public ObservableList<Libro> getLista() {
         return lista;
     }
@@ -16,45 +20,55 @@ public class LibroRepository  {
         lista.add(libro);
         guardar();
     }
+
     public void eliminar(Libro libro) {
         lista.remove(libro);
         guardar();
     }
+
     public void actualizar() {
         guardar();
     }
+
     private void cargar() {
         File archivo = new File(ARCHIVO);
         if (!archivo.exists()) return;
-        try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
-            String linea;
-            while ((linea = br.readLine()) != null) {
+
+        try {
+            Scanner scanner = new Scanner(archivo);
+            while (scanner.hasNextLine()) {
+                String linea = scanner.nextLine();
                 if (!linea.isBlank()) {
-                    lista.add(Libro.desdeTexto(linea));
+                    lista.add(new Libro(linea));
                 }
             }
+            scanner.close();
         } catch (IOException e) {
             System.out.println("Error al cargar: " + e.getMessage());
         }
     }
+
     private void guardar() {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(ARCHIVO))) {
+        try {
+            PrintWriter pw = new PrintWriter(ARCHIVO);
             for (Libro l : lista) {
-                bw.write(l.aTexto());
-                bw.newLine();
+                pw.println(l.aTexto());
             }
+            pw.close();
         } catch (IOException e) {
             System.out.println("Error al guardar: " + e.getMessage());
         }
     }
+
+
     public void exportarReporte() {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter("reporte.csv"))) {
-            bw.write("ISBN,Titulo,Autor,Año,Genero,Disponible");
-            bw.newLine();
+        try {
+            PrintWriter pw = new PrintWriter(new FileWriter("reporte.csv"));
+            pw.println("ISBN,Titulo,Autor,Año,Genero,Disponible");
             for (Libro l : lista) {
-                bw.write(l.aTexto());
-                bw.newLine();
+                pw.println(l.aTexto());
             }
+            pw.close();
         } catch (IOException e) {
             System.out.println("Error al exportar: " + e.getMessage());
         }
