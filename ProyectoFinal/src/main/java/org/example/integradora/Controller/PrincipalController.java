@@ -41,7 +41,6 @@ public class PrincipalController {
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setTitle("Nuevo Libro");
             stage.setScene(new Scene(loader.load()));
-            // Le pasamos el repositorio y null porque es libro nuevo
             FormularioController controller = loader.getController();
             controller.inicializar(null, repositorio);
             stage.showAndWait();
@@ -83,11 +82,10 @@ public class PrincipalController {
         Alert confirmacion = new Alert(Alert.AlertType.CONFIRMATION);
         confirmacion.setTitle("Confirmar");
         confirmacion.setContentText("Eliminar el libro: " + seleccionado.getTitulo() + "?");
-        confirmacion.showAndWait().ifPresent(respuesta -> {
-            if (respuesta == ButtonType.OK) {
-                repositorio.eliminar(seleccionado);
-            }
-        });
+        confirmacion.showAndWait();
+        if (confirmacion.getResult() == ButtonType.OK) {
+            repositorio.eliminar(seleccionado);
+        }
     }
     @FXML
     void onVerDetalle(ActionEvent event) {

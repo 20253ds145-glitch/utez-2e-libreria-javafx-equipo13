@@ -29,7 +29,6 @@ public class FormularioController {
     }
     @FXML
     void onGuardar(ActionEvent event) {
-
         // Validar campos vacios
         if (txtIsbn.getText().isBlank() || txtTitulo.getText().isBlank() ||
                 txtAutor.getText().isBlank() || txtAnio.getText().isBlank() ||
@@ -63,21 +62,14 @@ public class FormularioController {
 
         if (libroEditar == null) {
             // Es un libro nuevo
-            // Validar ISBN duplicado
+            // Validar id duplicado
             for (Libro l : repositorio.getLista()) {
                 if (l.getIsbn().equals(txtIsbn.getText())) {
                     mostrarAlerta("Ya existe un libro con ese ID.");
                     return;
                 }
             }
-            Libro nuevo = new Libro(
-                    txtIsbn.getText(),
-                    txtTitulo.getText(),
-                    txtAutor.getText(),
-                    anio,
-                    txtGenero.getText(),
-                    chkDisponible.isSelected()
-            );
+            Libro nuevo = new Libro(txtIsbn.getText(), txtTitulo.getText(), txtAutor.getText(), anio, txtGenero.getText(), chkDisponible.isSelected());
             repositorio.agregar(nuevo);
         } else {
             libroEditar.setIsbn(txtIsbn.getText());
@@ -88,7 +80,7 @@ public class FormularioController {
             libroEditar.setDisponible(chkDisponible.isSelected());
             repositorio.actualizar();
         }
-        // Cerrar la ventana
+        // Cerrar la ventana0
         Stage stage = (Stage) txtIsbn.getScene().getWindow();
         stage.close();
     }
